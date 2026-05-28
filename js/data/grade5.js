@@ -60,11 +60,11 @@ window.MaLiPingVocab = window.MaLiPingVocab || {};
          if(sub.length === 2) {
            const char = sub[0];
            const phrases = sub[1].split(',');
-           vocab.push({ id: \`g5_\${count++}\`, char: char, lesson: currentLesson, phrases: phrases });
+           vocab.push({ id: `g5_${count++}`, char: char, lesson: currentLesson, phrases: phrases });
          } else {
-           const chars = sub[0].replace(/\\s+/g, '');
+           const chars = sub[0].replace(/\s+/g, '');
            for(let char of chars) {
-             vocab.push({ id: \`g5_\${count++}\`, char: char, lesson: currentLesson, phrases: [] });
+             vocab.push({ id: `g5_${count++}`, char: char, lesson: currentLesson, phrases: [] });
            }
          }
       }
