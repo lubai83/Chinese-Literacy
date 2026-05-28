@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>认字乐园</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/pinyin-pro"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+</head>
+<body>
+  <nav class="topbar">
+    <button class="btn-home" onclick="goHome()">🏠 主页</button>
+    <div class="controls">
+      <select id="lessonSelect" onchange="onLessonChange()"></select>
+      <div class="radio-group">
+        <label><input type="radio" name="reviewMode" value="current" checked onchange="onModeChange()"> 当前课</label>
+        <label><input type="radio" name="reviewMode" value="grade" onchange="onModeChange()"> 年级复习</label>
+        <label><input type="radio" name="reviewMode" value="all" onchange="onModeChange()"> 总复习</label>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-layout">
+    <!-- Left Column: Flashcard + Pagination -->
+    <div class="left-col">
+      <div class="card-container">
+        <div class="progress-container">
+          <span class="progress-text" id="progressText">进度: 0 / 0</span>
+          <span class="progress-char" id="progressChar">-</span>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+        </div>
+
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="front" id="cardFront"></div>
+          <div class="back" id="cardBack">
+            <div class="pinyin" id="cardPinyin"></div>
+            <div class="char-back" id="cardCharBack"></div>
+            <div class="audio-btn-container">
+              <button class="btn-audio" onclick="playAudio(event)">🔊 读音与组词</button>
+            </div>
+            <div class="phrases" id="cardPhrases"></div>
+          </div>
+        </div>
+        <div class="rating-buttons">
+          <button class="btn-red" onclick="rateCard('unfamiliar')">不认识</button>
+          <button class="btn-yellow" onclick="rateCard('vague')">模糊</button>
+          <button class="btn-green" onclick="rateCard('familiar')">认识</button>
+        </div>
+      </div>
+      
+      <div class="pagination-buttons-outside">
+        <button class="btn-prev" onclick="prevCard()">‹ 上一个</button>
+        <button class="btn-next" onclick="nextCard()">下一个 ›</button>
+      </div>
+    </div>
+
+    <!-- Right Column: Hanzi Writer -->
+    <div class="card-container" style="flex: none; width: 450px;">
+      <div id="hanzi-grid"></div>
+      <div class="writer-controls">
+        <button class="btn-writer" onclick="animateStroke()">播放笔顺</button>
+        <button class="btn-writer" onclick="startQuiz()">自己写 (测验)</button>
+      </div>
+    </div>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>📕 生字本</h3>
+        <button class="btn-clear" onclick="clearDifficultWords()">一键清空</button>
+      </div>
+      <ul id="difficultList"></ul>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
